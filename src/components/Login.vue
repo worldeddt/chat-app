@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import AuthService from "@/services/AuthService";
 import {ref} from "vue";
-import axios from "axios";
 const id = ref<string>("");
 const password = ref<string>("");
 const errorMessage = ref<string>("");

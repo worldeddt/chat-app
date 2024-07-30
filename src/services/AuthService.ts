@@ -1,12 +1,16 @@
 import axios from "axios";
-
-
 const API_URL:string = "http://localhost:8081";
 
 class AuthService {
     login(username: string, password: string): Promise<boolean> {
         return axios
-          .post<boolean>(API_URL + '/login', { username, password })
+          .post<boolean>(API_URL + '/auth/login', { "userId": username, password },
+          {
+                    "headers": {
+                      "Authorization": "X-CODE"
+                    },
+                 }
+              )
           .then(response => {
               if (response.data) {
                   localStorage.setItem('authenticated', 'true');
