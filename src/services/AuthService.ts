@@ -2,6 +2,11 @@ import axios from "axios";
 const API_URL:string = "http://localhost:8081";
 
 class AuthService {
+
+    signUp(username:string, password:string, userType:string): Promise<boolean> {
+        return axios
+            .post<boolean>()
+    }
     login(username: string, password: string): Promise<boolean> {
         return axios
           .post<boolean>(API_URL + '/auth/login', { "userId": username, password },
