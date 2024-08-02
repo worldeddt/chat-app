@@ -5,43 +5,35 @@ const username = ref<string>("");
 const password = ref<string>("");
 const errorMessage = ref<string>("");
 
+
+
 const login = () => {
   errorMessage.value = "";
 
   console.log('로그인 시도:', { username: username.value, password: password.value });
 
   AuthService.login(username.value, password.value)
-      .then(() => {
+      .then((response) => {
         (window as any).$router.push('/');
       })
       .catch(() => {
         errorMessage.value = 'Invalid username or password';
       })
-
-  // axios.post("http://localhost:8081", {
-  //   "userId":id,
-  //   "password":password
-  // }).then((response) => {
-  //   console.log(response);
-  // }).catch((e) => {
-  //   console.error(e);
-  // })
 }
 </script>
 
 <template>
   <div class="login-container">
-    <h1>Login</h1>
     <form @submit.prevent="login">
       <div class="input-group">
-        <label for="username">Username</label>
+        <label for="username">아이디</label>
         <input type="text" id="username" v-model="username" required />
       </div>
       <div class="input-group">
-        <label for="password">Password</label>
+        <label for="password">비밀번호</label>
         <input type="password" id="password" v-model="password" required />
       </div>
-      <button type="submit">Login</button>
+      <button type="submit">로그인</button>
     </form>
   </div>
   <div>
