@@ -8,8 +8,7 @@ const userType = ref<string>("");
 const tel = ref<string>("")
 
 
-const signUpRequest = () => {
-
+const signUp = () => {
   const usernameValue = username.value;
   const passwordValue = password.value;
   const userTypeValue = userType.value;
@@ -29,33 +28,30 @@ const signUpRequest = () => {
 </script>
 
 <template>
-  <div style="display: block">
-    <div>
-      <select id="userType" v-model="userType">
-        <option value="GUEST" selected>
-          guest
-        </option>
-        <option value="HOST">
-          host
-        </option>
-      </select>
-    </div>
-    <div>
-      <label for="username">Username</label>
-      <input type="text" v-model="username" required />
-    </div>
-    <div>
-      <label for="password">password</label>
-      <input type="text" id="password" v-model="password" required />
-    </div>
-    <div>
-      <label for="tel">tel</label>
-      <input type="text" id="tel" v-model="tel" required />
-    </div>
-  </div>
-  <div>
-    <button id="signUpButton" @click="signUpRequest()"> 가입
-    </button>
+  <div class="signup-container">
+    <h1>가입</h1>
+    <form @submit.prevent="signUp">
+      <div class="input-group">
+        <label for="username">아이디</label>
+        <input type="text" id="username" v-model="username" required />
+      </div>
+      <div class="input-group">
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" v-model="password" required />
+      </div>
+      <div class="input-group">
+        <label for="tel">전화번호</label>
+        <input type="tel" id="tel" v-model="tel" required />
+      </div>
+      <div class="input-group">
+        <label for="userType">사용자 타입</label>
+        <select id="userType" v-model="userType" required>
+          <option value="HOST" selected>호스트</option>
+          <option value="GUEST">게스트</option>
+        </select>
+      </div>
+      <button type="submit">가입</button>
+    </form>
   </div>
   <p>
     {{username}}
@@ -64,7 +60,50 @@ const signUpRequest = () => {
     {{tel}}
   </p>
 </template>
+<style scoped lang="scss">
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #3b5998, #8b9dc3);
+  color: #fff;
 
-<style scoped>
+  h1 {
+    margin-bottom: 20px;
+  }
 
+  .input-group {
+    margin-bottom: 15px;
+    width: 100%;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+  }
+
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2a4887;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #1a3767;
+    }
+  }
+}
 </style>
