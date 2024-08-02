@@ -1,11 +1,41 @@
 import axios from "axios";
 const API_URL:string = "http://localhost:8081";
 
+interface SignUpBody {
+    username:string;
+    password:string;
+    userType:string;
+    tel:string;
+}
+
 class AuthService {
 
-    signUp(username:string, password:string, userType:string): Promise<boolean> {
+    signUp({
+        username,
+        password,
+        userType,
+        tel
+           }): Promise<""> {
         return axios
-            .post<boolean>()
+            .put<boolean>(API_URL+"/auth/signUp", {
+                username,
+                password,
+                userType,
+                tel
+            }, {
+                "headers": {
+                    "Authorization": "X-CODE"
+                },
+            }).then(response => {
+                if (response.status == 200) {
+                    alert("저장 성공");
+                    return;
+                }
+
+                alert("저장 실패");
+            }).catch(e => {
+                alert("저장 실패");
+            })
     }
     login(username: string, password: string): Promise<boolean> {
         return axios
