@@ -2,6 +2,7 @@ import axios from "axios";
 import {useRouter} from "vue-router";
 const API_URL:string = "http://localhost:8081";
 const router = useRouter();
+axios.defaults.withCredentials = true;
 
 interface SignUpBody {
     username:string;
@@ -11,6 +12,14 @@ interface SignUpBody {
 }
 
 class AuthService {
+    rooms():Promise<""> {
+        return axios.get(API_URL+"/api/rooms", {
+            "headers": {
+            "Authorization": "X-CODE"
+            }
+        })
+
+    }
     signUp({
         username,
         password,
@@ -27,18 +36,9 @@ class AuthService {
                 "headers": {
                     "Authorization": "X-CODE"
                 }
-            }).then(response => {
+            }).finally(response => {
                 return response;
-                if (response.status == 200) {
-                    alert("저장 성공");
-                    router.push("/");
-                    return;
-                }
-
-                alert("저장 실패");
-            }).catch(e => {
-                alert("저장 실패");
-            })
+        });
     }
     login(username: string, password: string): Promise<boolean> {
         return axios

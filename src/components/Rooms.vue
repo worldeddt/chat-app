@@ -14,18 +14,16 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import AuthService from "@/services/AuthService";
 
-const rooms = ref([]);
+let rooms = ref([]);
 
 const fetchRooms = async () => {
   try {
-    const response = await axios.get('/api/rooms', {
-      "headers": {
-        "Authorization": "X-CODE"
-      }
+    await AuthService.rooms()
+        .then(response => {
+      rooms.value = response.data;
     });
-    console.log(response);
-    // rooms.value = response.data;
   } catch (error) {
     console.error('Failed to fetch rooms:', error);
   }
