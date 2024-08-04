@@ -20,7 +20,17 @@ const signUp = () => {
         userType : userTypeValue,
         tel : telValue
       }
-  )
+  ).then(response => {
+    if (response.status == 200) {
+      alert("저장 성공");
+      router.push("/");
+      return;
+    }
+
+    alert("저장 실패");
+  }).catch(e => {
+    alert("저장 실패");
+  })
 }
 
 
@@ -53,12 +63,6 @@ const signUp = () => {
       <button type="submit">가입</button>
     </form>
   </div>
-  <p>
-    {{username}}
-    {{password}}
-    {{userType}}
-    {{tel}}
-  </p>
 </template>
 <style scoped lang="scss">
 .signup-container {
@@ -67,42 +71,49 @@ const signUp = () => {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: linear-gradient(135deg, #3b5998, #8b9dc3);
-  color: #fff;
+  background-color: #f5f5f5;
+  color: #007aff;
 
   h1 {
     margin-bottom: 20px;
+    font-size: 24px;
+    color: #007aff;
   }
 
   .input-group {
     margin-bottom: 15px;
     width: 100%;
+    max-width: 400px;
 
     label {
       display: block;
       margin-bottom: 5px;
+      font-weight: bold;
     }
 
     input,
     select {
       width: 100%;
       padding: 10px;
-      border: none;
+      border: 1px solid #007aff;
       border-radius: 5px;
+      font-size: 16px;
     }
   }
 
   button {
+    width: 100%;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #2a4887;
+    background-color: #007aff;
     color: #fff;
+    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #1a3767;
+      background-color: #005bb5;
     }
   }
 }

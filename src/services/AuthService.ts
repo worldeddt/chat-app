@@ -1,5 +1,7 @@
 import axios from "axios";
+import {useRouter} from "vue-router";
 const API_URL:string = "http://localhost:8081";
+const router = useRouter();
 
 interface SignUpBody {
     username:string;
@@ -9,7 +11,6 @@ interface SignUpBody {
 }
 
 class AuthService {
-
     signUp({
         username,
         password,
@@ -25,10 +26,12 @@ class AuthService {
             }, {
                 "headers": {
                     "Authorization": "X-CODE"
-                },
+                }
             }).then(response => {
+                return response;
                 if (response.status == 200) {
                     alert("저장 성공");
+                    router.push("/");
                     return;
                 }
 
@@ -47,9 +50,6 @@ class AuthService {
                  }
               )
           .then(response => {
-              if (response.data) {
-                  localStorage.setItem('authenticated', 'true');
-              }
               return response.data;
           });
     }
