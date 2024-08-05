@@ -1,6 +1,6 @@
 <template>
   <div class="rooms-container">
-    <h1>Available Rooms</h1>
+    <h1>대기방</h1>
     <div class="room-list">
       <div v-for="room in rooms" :key="room.id" class="room-item">
         <h2>{{ room.name }}</h2>
